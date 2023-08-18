@@ -30,22 +30,33 @@ function* getInfosCandidat({token, userId}: IGetInfosCandidat): Generator<any, v
 function* updateCandidats({data, userId}:IUpdateCandidat): Generator<any, void, any> {
     try {
         const response = yield call(updateCandidatQuery, data, userId)
-            
+
         if (!response) {
-            console.log("Pas de reponse")
-        } else if (response.status === 200) {
+            console.log("pas de response");
+        }
+        else if (response.status === 200) {
             yield put(updateCandidatSuccess(response.data))
             toast.success('Mise à jour success !', {
                 position: toast.POSITION.TOP_RIGHT
             });
-            console.log("Recuperation info candidat success")
+            console.log("Mise à jour info candidat success")
+        } else if (response.status == 401) {
+            toast.error('Email existe déjà!', {
+                position: toast.POSITION.TOP_RIGHT
+            });
         } else if (response.status == 403) {
             // toast.error('E-mail déjà existé !', {
             //     position: toast.POSITION.TOP_RIGHT
             // });
             console.log("Pas d'autorisation");   
         }
-    } catch (error) {
+    } catch (error: any) {
+        if (error.response) {
+            const responseData = error.response.data;
+            // Traitez les données d'erreur ici si nécessaire
+            console.error('Erreur de l\'API:', responseData);
+            return responseData; // Renvoyer les données d'erreur
+          }
         console.log(error)
     }
 }

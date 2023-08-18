@@ -19,8 +19,8 @@ export const updateCandidatQuery = async (data: any, userId: string) => {
         const response = await axiosInstance.put('/candidat-info/update-candidat/' + userId, data)
 
         return response;
-    } catch (error) {
-        console.error(error);
+    } catch (error: any) {
+        return error.response
     }
 }
 
