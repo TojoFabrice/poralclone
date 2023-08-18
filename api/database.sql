@@ -9,13 +9,6 @@ CREATE TABLE users(
     user_password VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE userrecruteurs(
-    user_recruteur_id uuid PRIMARY KEY DEFAULT
-    uuid_generate_v4(),
-    societe_name VARCHAR(255) NOT NULL,
-    recruteur_email VARCHAR(255) NOT NULL,
-    recruteur_password VARCHAR(255) NOT NULL
-);
 
 CREATE TABLE candidats(
     candidat_id uuid PRIMARY KEY DEFAULT
@@ -34,7 +27,7 @@ CREATE TABLE candidats(
 
 CREATE TABLE recruteurs(
     recruteur_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    user_recruteur_id uuid REFERENCES userrecruteurs(user_recruteur_id),
+    user_recruteur_id uuid REFERENCES users(user_id),
     site_web VARCHAR(255),
     siege_social VARCHAR(255),
     effectif VARCHAR(255),

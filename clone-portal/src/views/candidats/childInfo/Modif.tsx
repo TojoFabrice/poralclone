@@ -31,6 +31,9 @@ const Modif = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
 
+    // console.log('99999999999999999999999999999',candidat_datas);
+    
+
     const [formInfos, setFormInfos] = useState<IFormUser>({
         name: "",
         email: "",

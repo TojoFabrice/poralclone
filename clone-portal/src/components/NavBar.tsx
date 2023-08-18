@@ -52,7 +52,7 @@ const NavBar = () => {
     useEffect(() => {
         const autoLogoutTimer = setTimeout(() => {
             dispatch(userSignOut(token));
-        }, 3000000);
+        }, 3000000 );
 
         return () => {
             clearTimeout(autoLogoutTimer);
