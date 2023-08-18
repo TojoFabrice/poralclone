@@ -18,6 +18,9 @@ app.use('/recruteur', require("./routes/jwtAuth"))
 //Update info candidat
 app.use('/candidat-info', require("./routes/candidatInfo"))
 
+//Update info candidat
+app.use('/recruteur-info', require("./routes/recruteurInfo"))
+
 //Route add CV
 app.use('/api', require('./routes/uploadfile'))
 

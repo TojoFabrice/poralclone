@@ -48,14 +48,16 @@ router.put('/update-candidat/:userId', async (req, res) => {
         const { name, email } = updatedUserData
 
         // check if  user exist (if user exist throw error)
-        // const user = await pool.query('SELECT * FROM users WHERE user_email = $1', [email]);
+        const user = await pool.query('SELECT * FROM users WHERE user_email = $1 AND user_id != $2', [email,user_id]);
 
-        // if (user.rows.length !== 0) {
-        //     return res.status(401).send('user already exist')
-        // }
+        if (user.rows.length !== 0) {
+            return res.status(401).json({ status: false, message: "E-mail existe déjà !" })
+        }
 
         const updatedUserResult = await pool.query(updateUserQuery, [name, email, user_id]);
         const updatedUsers = updatedUserResult.rows[0]
+        
+
 
         ////////////////////////END UPDATE USERS//////////////////////
 
